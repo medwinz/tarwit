@@ -1,0 +1,30 @@
+<!-- Form used for updation of data into database -->
+<form class="form-horizontal alert alert-warning" id="editForm" ng-submit="UpdateInfo(currentUser)" hidden>
+<h3 class="text-center">Update Employee Details</h3>
+	<div class="form-group">
+		<label for="Name">Employee Name:</label>
+		<input type="text" class="form-control" ng-model="currentUser.emp_name" value="{{currentUser.name}}">
+	</div>
+	
+	<div class="form-group">
+		<label for="Email">Email Address:</label>
+		<input type="email" class="form-control" ng-model="currentUser.emp_email" value="{{currentUser.emp_email}}">
+	</div>
+		<div class="form-group">
+		<label for="Gender">Gender:</label>
+		<label for="" class="radio-inline gender">
+			<input type="radio" ng-model="currentUser.emp_gender" value="male" >Male
+		</label>
+		<label for="" class="radio-inline gender">
+			<input type="radio" name="gender" ng-model="currentUser.emp_gender" value="female">Female
+		</label>
+	</div>
+	
+	<div class="form-group">
+		<label for="Address">Address:</label>
+		<input type="text" class="form-control" ng-model="currentUser.emp_address" value="{{currentUser.emp_address}}">
+	</div>
+	<div class="form-group">
+		<button class="btn btn-warning" ng-disabled="empList.$invalid" ng-click="updateMsg(currentUser.emp_id)">Update</button>
+	</div>
+</form>

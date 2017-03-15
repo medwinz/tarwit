@@ -1,0 +1,123 @@
+<html ng-app="crudApp">
+<head>
+<title>AngularJS CRUD Operations Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<!-- Include main CSS -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<!-- Include jQuery library -->
+<script src="js/jQuery/jquery.min.js"></script>
+<!-- Include AngularJS library -->
+<script src="lib/angular/angular.min.js"></script>
+<!-- Include Bootstrap Javascript -->
+<script src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="js/webcam.min.js"></script>
+
+<script src="js/angular-script.js"></script>
+</head>
+<body>
+	<div class="container wrapper" ng-controller="DbController">
+	<h3 class="text-center">Registration</h3>
+	
+	<form class="form-horizontal" name="empList" id="empForm" ng-submit="insertInfo(empInfo);">
+		<div class="form-group">
+			<label for="Name">Name:</label>
+			<input type="text" name="emp_name" class="form-control" placeholder="Enter Employee Name" ng-model="empInfo.name" value="" autofocus required />
+		</div>
+		<div class="form-group">
+			<p class="text-danger" ng-show="empList.emp_name.$invalid && empList.emp_name.$dirty">Name field is Empty!</p>
+		</div>
+		<div class="form-group">
+			<label for="Email">Email Address:</label>
+			<input type="email" name="emp_email" class="form-control" placeholder="Enter Employee Email Address" ng-model="empInfo.email" autofocus required />
+		</div>
+		<div class="form-group">
+			<p class="text-danger" ng-show="empList.emp_email.$invalid && empList.emp_email.$dirty">Invalid Email!</p>
+		</div>
+		<div class="form-group">
+			<label for="Gender">Gender:</label>
+			<label for="" class="radio-inline gender">
+				<input type="radio" name="emp_gender" value="male" ng-model="empInfo.gender">Male
+			</label>
+			<label for="" class="radio-inline gender">
+				<input type="radio" name="emp_gender" value="female" ng-model="empInfo.gender">Female
+			</label>
+		</div>
+		
+		<div class="form-group">
+			<label for="Address">Address:</label>
+			<input type="text" name="emp_address" class="form-control" placeholder="Enter Employee Address" ng-model="empInfo.address" autofocus required />		
+		</div>
+		<div class="form-group">
+			<p class="text-danger" ng-show="empList.emp_address.$invalid && empList.emp_address.$dirty">Address field is Empty!</p>
+		</div>
+		
+		<div class="form-group">
+			<div style="text-align: center">
+				<img src="images/user.png" id="results" class="img-thumbnail" width="300" height="300"><br>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Take Your Photo</button>
+			</div>
+			
+
+		</div>
+		
+<!-- Modal -->
+		<div id="myModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Modal Header</h4>
+		      </div>
+		      <div class="modal-body">
+		        <div id="my_camera"></div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-success" onClick="take_snapshot()">Take SnapShot</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+		
+		<div class="form-group">
+			<button class="btn btn-warning" ng-disabled="empList.$invalid">Add Into Database</button>
+		</div>
+	
+	
+	<!-- Code to handle taking the snapshot and displaying it locally -->
+		
+	</form>
+
+
+	
+<!-- Table to show employee detalis -->
+	</div>
+<!-- Include controller -->
+<script language="JavaScript">
+	Webcam.set({
+		width: 320,
+		height: 240,
+		image_format: 'jpeg',
+		jpeg_quality: 90
+	});
+	Webcam.attach( '#my_camera' );
+</script>
+<script language="JavaScript">
+	function take_snapshot() {
+		// take snapshot and get image data
+		Webcam.snap( function(data_uri) {
+			// display results in page
+			document.getElementById('results').src =data_uri;
+		} );
+	}
+</script>
+	
+
+</body>
+</html>
