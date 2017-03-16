@@ -10,13 +10,12 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 //$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token, $access_token_secret);
 //$content = $connection->get("account/verify_credentials");
 
-$twitteruser = "opensuseid";
+$twitteruser = "maulblues";
 $notweets = 30;
-$consumerkey = "iQAwQV0sVg0TjYuNz4ENJ6r6d";
-$consumersecret = "FfzZRiHopE9T78PmXmNzDGb58Kd9l8irxjp7cpL1hr2BnpgYu8";
-$accesstoken = "740354983124574209-sNaPVEYtJngCMR6rKBI9dSpiFGG4Pd3";
-$accesstokensecret = "qefFkA4Mq1PtaAE4nim69GRLr9H4Vl4eCyMG15nJvN4U4";
-
+$consumerkey = "ZUMs0Hj1EgoROdRfjtXrSJkmp";
+$consumersecret = "XhWr8j2bGPehMPsclK7UXBcvjrVKxsSlwuUNf0PQlbqruqY95t";
+$accesstoken = "134039616-sYpKslNFqkzI0HNdapvmasuKyQrXwxYbGBnKQmNO";
+$accesstokensecret = "jQnMmTZ4YNqWcUrYYfrHdg2Y6WPAuP310kGHj2R1krZ7M";
  
 function getConnectionWithAccessToken($cons_key, $cons_secret, $oauth_token, $oauth_token_secret) {
   $connection = new TwitterOAuth($cons_key, $cons_secret, $oauth_token, $oauth_token_secret);
@@ -37,7 +36,7 @@ $gender = mysqli_real_escape_string($con, $data->gender);
 $comment = mysqli_real_escape_string($con, $data->comment);
 $email = mysqli_real_escape_string($con, $data->email);
 $twitterid = mysqli_real_escape_string($con, $data->twitterid);
-
+$twitterid = "@".$twitterid;
 $binary_data = base64_decode( mysqli_real_escape_string($con, $data->photo) );
 $photo_name = "img/".$name.".jpg";
 $photoAddr = "C:/xammpp/htdocs/angularCRUD/databaseFiles/".$photo_name;
@@ -45,7 +44,7 @@ $photoAddr = "C:/xammpp/htdocs/angularCRUD/databaseFiles/".$photo_name;
 
 $connection = getConnectionWithAccessToken($consumerkey, $consumersecret, $accesstoken, $accesstokensecret);
  
-$str_name = "My name is ".$name." from ".$country." I'm visiting #openSUSE booth at #FOSSASIA'17"; 
+$str_name = "My name is ".$name." from ".$country." I'm visiting #openSUSE booth at #FOSSASIA'17 ".$twitterid; 
 //$tweets = $connection->post("statuses/update", ["status" => $str_name]);
 
 /*
@@ -63,8 +62,9 @@ $result = $connection->post('statuses/update', $parameters);
 
 
 
-    $result = file_put_contents( $photo_name, $binary_data );
-    if (!$result) die("Could not save image!  Check file permissions.");
+$result = file_put_contents( $photo_name, $binary_data );
+//if (!$result) die("Could not save image!  Check file permissions.");
+if (!$result) $photoAddr='';
 
 
 $media1 = $connection->upload('media/upload', ['media' => $photo_name]);
