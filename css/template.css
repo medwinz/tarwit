@@ -19,6 +19,11 @@ body {
   line-height: 30px;
   color: #777;
   background: #404f41;
+  position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
 .container {
@@ -79,7 +84,6 @@ fieldset {
   width: 100%;
   border: 1px solid #ccc;
   background: #FFF;
-  margin: 0 0 5px;
   padding: 10px;
 }
 
