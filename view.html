@@ -1,0 +1,60 @@
+<html ng-app="crudApp">
+<head>
+<title>Daftar dan Twit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<!-- Include main CSS -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<!-- Include jQuery library -->
+<script src="js/jQuery/jquery.min.js"></script>
+<!-- Include AngularJS library -->
+<script src="lib/angular/angular.min.js"></script>
+<!-- Include Bootstrap Javascript -->
+<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container wrapper" ng-controller="DbController">
+<div class="row">
+	<div class="col-md-2">
+		<img src="images/logo.png" width="80" height="80">
+	</div>
+	<div class="col-md-8">
+		<h1 class="text-center">Visitor List</h1>
+		<h4 class="text-center"> FOSSASIA SUMMIT AT SCIENCE CENTRE SINGAPORE <br>
+17TH - 19TH MARCH 2017</h4>	
+	</div>
+	<div class="col-md-2" style="padding-top: 20">
+		<img src="images/logo1.png" width="75" height="30">
+	</div>
+</div>
+
+<div class="clearfix"></div>
+
+<!-- Table to show employee detalis -->
+<br>
+<div class="table-responsive">
+<table class="table table-hover">
+<tr>
+<th>Name</th>
+<th>Country</th>
+<th>Email</th>
+<th>Twitter Account</th>
+<th>Comment</th>
+</tr>
+<tr ng-repeat="detail in details| filter:search_query">
+<td>
+<span>{{detail.visitor_name}}</span></td>
+<td>{{detail.visitor_country}}</td>
+<td>{{detail.visitor_email}}</td>
+<td>{{detail.visitor_twitterid}}</td>
+<td>{{detail.visitor_comment}}</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<!-- Include controller -->
+<script src="js/angular-script.js"></script>
+</body>
+</html>
