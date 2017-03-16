@@ -43,7 +43,8 @@ crudApp.controller("DbController",['$scope','$http', function($scope,$http){
 	}
 
 	$scope.insertInfo = function(info){
-		$http.post('databaseFiles/insertDetails.php',{"name":info.name,"country":info.country,"comment":info.comment,"photo":info.photo,"email":info.emp_email,"twitterid":info.emp_twitterid}).success(function(data){
+		console.log("check");
+		$http.post('http://visitor.opensuse.id/databaseFiles/insertDetails.php',{"name":info.name,"country":info.country,"comment":info.comment,"photo":info.photo,"email":info.emp_email,"twitterid":info.emp_twitterid}).success(function(data){
 			if (data == true) {
 				getInfo();
 				$('#empForm').css('display', 'none');
