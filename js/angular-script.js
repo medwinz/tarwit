@@ -6,7 +6,7 @@ crudApp.controller("DbController",['$scope','$http', function($scope,$http){
 	getInfo();
 	function getInfo(){
 	// Sending request to EmpDetails.php files 
-		$http.post('databaseFiles/empDetails.php').success(function(data){
+		$http.post('http://visitor.opensuse.id/databaseFiles/empDetails.php').success(function(data){
 		// Stored the returned data into scope 
 		$scope.details = data;
 		});
@@ -22,6 +22,10 @@ crudApp.controller("DbController",['$scope','$http', function($scope,$http){
 		$('#editForm').css('display', 'none');
 	}
 	
+	$scope.opencamera =function(){
+		Webcam.attach( '#my_camera' );
+	}
+
 	$scope.take_snapshot1 =function(){
 		console.log("cek123");
 		Webcam.snap( function(data_uri) {
@@ -31,6 +35,7 @@ crudApp.controller("DbController",['$scope','$http', function($scope,$http){
         console.log(raw_image_data);
         //document.getElementById('mydata').value = raw_image_data;
       $scope.empInfo.photo= raw_image_data;
+      Webcam.reset();
       /*
       Webcam.upload( data_uri, 'databaseFiles/imageStore.php', function(code, text) {
             // Upload complete!
@@ -43,14 +48,16 @@ crudApp.controller("DbController",['$scope','$http', function($scope,$http){
 	}
 
 	$scope.insertInfo = function(info){
-		console.log("check");
-		$http.post('http://visitor.opensuse.id/databaseFiles/insertDetails.php',{"name":info.name,"country":info.country,"comment":info.comment,"photo":info.photo,"email":info.emp_email,"twitterid":info.emp_twitterid}).success(function(data){
+		$http.post('http://visitor.opensuse.id/databaseFiles/insertDetails.php',{"name":info.name,"country":info.country,"comment":info.comment,"photo":info.photo,"email":info.email,"twitterid":info.twitterid}).success(function(data){
 			if (data == true) {
 				getInfo();
 				$('#empForm').css('display', 'none');
 				console.log("success");
 			}
 			console.log("masuk");
+			$('#tesalert').show();
+			setTimeout(function(){ location.reload(); }, 1000);
+			
 		});
 	}
 
