@@ -2,7 +2,7 @@
 var crudApp = angular.module('crudApp',[]);
 crudApp.controller("DbController",['$scope','$http', function($scope,$http){
 
-// Function to get employee details from the database
+// Function to get personal details from the database
 	getInfo();
 	function getInfo(){
 	// Sending request to EmpDetails.php files 
